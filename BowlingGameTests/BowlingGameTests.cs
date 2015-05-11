@@ -32,8 +32,7 @@ namespace BowlingGameTests
         {
             var game = SetupGame();
 
-            game.Roll(5);
-            game.Roll(5);
+            RollSpare(game);
             game.Roll(3);
             RollPins(game, 17, 0);
 
@@ -53,6 +52,12 @@ namespace BowlingGameTests
             {
                 game.Roll(pinsHitPerRole);
             }
+        }
+
+        private static void RollSpare(Game game)
+        {
+            game.Roll(5);
+            game.Roll(5);
         }
 
         #endregion
