@@ -9,10 +9,19 @@ namespace BowlingGame
     public class Game
     {
         private List<int> _rolls = new List<int>(21);
+        private int _currentRoll = 0;
+
+        public Game()
+        {
+            for (int i = 0; i < 22; i++)
+            {
+                _rolls.Add(0);
+            }
+        }
 
         public void Roll(int pinsHit)
         {
-            _rolls.Add(pinsHit);
+            _rolls[_currentRoll++] = pinsHit;
         }
 
         public int Score
@@ -23,18 +32,29 @@ namespace BowlingGame
                 int frameIndex = 0;
                 for (int frame = 0; frame < 10; frame++)
                 {
-                    if (IsSpare(frameIndex))
+                    if (IsStrike(frameIndex))
+                    {
+                        score += 10 + _rolls[frameIndex + 1] + _rolls[frameIndex + 2];
+                        frameIndex++;
+                    }
+                    else if (IsSpare(frameIndex))
                     {
                         score += 10 + _rolls[frameIndex + 2];
+                        frameIndex += 2;
                     }
                     else
                     {
                         score += _rolls[frameIndex] + _rolls[frameIndex + 1];
+                        frameIndex += 2;
                     }
-                    frameIndex += 2;
                 }
                 return score;
             }
+        }
+
+        private bool IsStrike(int frameIndex)
+        {
+            return _rolls[frameIndex] == 10;
         }
 
         private bool IsSpare(int frameIndex)
