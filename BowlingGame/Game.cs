@@ -8,5 +8,11 @@ namespace BowlingGame
 {
     public class Game
     {
+        public object Score { get; set; }
+
+        public void Roll(int p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
