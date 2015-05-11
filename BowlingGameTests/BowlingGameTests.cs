@@ -27,6 +27,19 @@ namespace BowlingGameTests
             Assert.AreEqual(20, game.Score);
         }
 
+        [TestMethod]
+        public void TestOneSpare()
+        {
+            var game = SetupGame();
+
+            game.Roll(5);
+            game.Roll(5);
+            game.Roll(3);
+            RollPins(game, 17, 0);
+
+            Assert.AreEqual(16, game.Score);
+        }
+
         #region Private Methods
 
         private Game SetupGame()
