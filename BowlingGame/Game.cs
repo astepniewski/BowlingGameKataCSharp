@@ -15,8 +15,9 @@ namespace BowlingGame
 
         public int Score { get; set; }
 
-        public void Roll(int p)
+        public void Roll(int pinsHit)
         {
+            Score += pinsHit;
         }
     }
 }
