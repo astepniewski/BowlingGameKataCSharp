@@ -10,12 +10,9 @@ namespace BowlingGameTests
         [TestMethod]
         public void TestGutterGame()
         {
-            var game = new Game();
+            var game = SetupGame();
 
-            for (int i = 0; i < 20; i++)
-            {
-                game.Roll(0);
-            }
+            RollPins(game, 20, 0);
 
             Assert.AreEqual(0, game.Score);
         }
@@ -23,14 +20,28 @@ namespace BowlingGameTests
         [TestMethod]
         public void TestHittingOnePinPerRole()
         {
-            var game = new Game();
+            var game = SetupGame();
 
-            for (int i = 0; i < 20; i++)
-            {
-                game.Roll(1);
-            }
+            RollPins(game, 20, 1);
 
             Assert.AreEqual(20, game.Score);
         }
+
+        #region Private Methods
+
+        private Game SetupGame()
+        {
+            return new Game();
+        }
+
+        private void RollPins(Game game, int numberOfRolls, int pinsHitPerRole)
+        {
+            for (int i = 0; i < numberOfRolls; i++)
+            {
+                game.Roll(pinsHitPerRole);
+            }
+        }
+
+        #endregion
     }
 }
